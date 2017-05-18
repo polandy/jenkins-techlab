@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 withEnv(["JAVA_HOME=${tool 'jdk8_oracle'}", "PATH+MAVEN=${tool 'maven35'}/bin:${env.JAVA_HOME}/bin"]) {
-                    sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false'
+                    sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false -Dmaven.test.failure.ignore=true'
                     archiveArtifacts 'target/*.?ar'
                 }
             }
